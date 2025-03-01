@@ -1,0 +1,113 @@
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  background-color: #f9f9f9;
+}
+
+.container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  /* Выравнивание содержимого по центру */
+}
+
+.task-grid {
+  gap: 20px;
+  width: 100%;
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.task-card {
+  width: 75%;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+}
+
+.task-card:hover {
+  transform: scale(1.05);
+}
+
+
+h1 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+h3 {
+  font-size: 20px;
+  color: #555;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+p {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+ol,
+ul {
+  margin-left: 20px;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+li {
+  font-size: 16px;
+  color: #444;
+  margin-bottom: 5px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+  margin-top: 20px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  /* Выравнивание изображений по центру */
+}
+
+img.dual {
+  width: 40%;
+  /* Ширина каждого изображения */
+  display: inline-block;
+  /* Размещение изображений в одну строку */
+  margin: 1%;
+  /* Отступы между изображениями */
+  vertical-align: top;
+  /* Выравнивание по верхнему краю */
+}
+
+a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
