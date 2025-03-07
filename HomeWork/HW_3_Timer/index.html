@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Timer</title>
+    <style>
+        html, body {
+            height: 100%; /* Убедитесь, что высота страницы занимает весь экран */
+            margin: 0; /* Убираем стандартные отступы */
+        }
+        .container{
+            width: 100%;
+            height: 100%;
+            display: flex; /* Включаем Flexbox */
+            justify-content: center; /* Центрирование по горизонтали */
+            align-items: center; /* Центрирование по вертикали */
+            position: relative;
+        }
+        canvas {
+            position: absolute;
+            height: 50%;
+            width: 50%;
+            border: 1px solid black; /* Для визуализации границ canvas */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        button {
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        input {
+            position: absolute;
+            top: 20%;
+            left: 40%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <canvas></canvas>
+        <h1 id="timeClock">тест</h1>
+    </div>
+    <input id="timeInput" type="text" placeholder="Введите минуты">
+    <button>Start</button>
+
+    <script src="jquery-2.1.1.js"></script>
+    <script>
+        // JavaScript для рисования круга
+        const canvas = document.querySelector("canvas");
+        const ctx = canvas.getContext('2d');
+        // Очищаем canvas перед рисованием
+        canvas.width = window.innerWidth / 2;
+        canvas.height = window.innerHeight / 2;
+
+        const centerX = canvas.width / 2; // Центр по горизонтали
+        const centerY = canvas.height / 2; // Центр по вертикали
+        const radius = centerY - 10; // Радиус круга
+        const startAngle = -Math.PI / 2; // Начальный угол
+
+        function drawArc(angle) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height); // Очищаем canvas
+            
+            ctx.beginPath();
+            ctx.lineWidth = 5;
+            ctx.arc(centerX, centerY, radius, startAngle, startAngle + angle); // Рисуем дугу
+            ctx.stroke();
+        }
+
+        function startTimer() {
+            const timeInput = document.getElementById("timeInput");
+            const timeClock = document.getElementById("timeClock");
+
+            let totalSeconds = Number(timeInput.value) * 60; // Общее время в секундах
+            if (isNaN(totalSeconds) || totalSeconds <= 0) {
+                alert("Введите корректное значение времени!");
+                return;
+            }
+
+            let remainingTime = totalSeconds;
+
+            const interval = setInterval(() => {
+                if (remainingTime <= 0) {
+                    clearInterval(interval); // Останавливаем таймер
+                    timeClock.innerHTML = "Время истекло!";
+                    return;
+                }
+
+                // Обновляем оставшееся время (уменьшаем на 0.01 секунды)
+                remainingTime -= 0.01;
+
+                // Обновляем отображение времени (округляем до сотых секунды)
+                const minutes = Math.floor(remainingTime / 60);
+                const seconds = Math.floor(remainingTime % 60);
+                const milliseconds = Math.floor((remainingTime % 1) * 100);
+                timeClock.innerHTML = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}.${milliseconds < 10 ? '0' : ''}${milliseconds}`;
+
+                // Обновляем угол дуги
+                const angle = ((totalSeconds - remainingTime) / totalSeconds) * (2 * Math.PI);
+                drawArc(angle);
+            }, 10); // Обновляем каждые 10 миллисекунд
+        }
+
+        // Привязываем обработчик события к кнопке через jQuery
+        $('button').on('click', function () {
+            startTimer();
+        });
+    </script>
+</body>
+</html>

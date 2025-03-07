@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Эмулятор игральной кости</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 20px;
+    }
+    h1 {
+      color: #333;
+    }
+    .controls {
+      margin-bottom: 20px;
+    }
+    .controls input {
+      width: 50px;
+      padding: 5px;
+      margin: 0 10px;
+    }
+    .dice-container {
+      margin-top: 20px;
+    }
+    .dice {
+      display: inline-block;
+      width: 80px;
+      height: 80px;
+      line-height: 80px;
+      font-size: 24px;
+      font-weight: bold;
+      background-color: #f4f4f4;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      margin: 10px;
+      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Эмулятор игральной кости</h1>
+  <div class="controls">
+    <label for="faces">Количество граней:</label>
+    <input type="number" id="faces" value="6" min="2">
+    <label for="diceCount">Количество кубиков:</label>
+    <input type="number" id="diceCount" value="1" min="1">
+    <button id="rollButton">Бросить кубики</button>
+  </div>
+  <div class="dice-container" id="diceContainer"></div>
+
+  <script>
+    const rollButton = document.getElementById('rollButton');
+    const diceContainer = document.getElementById('diceContainer');
+
+    rollButton.addEventListener('click', function () {
+      // Получаем значения из полей ввода
+      const faces = parseInt(document.getElementById('faces').value);
+      const diceCount = parseInt(document.getElementById('diceCount').value);
+
+      // Очищаем контейнер с кубиками
+      diceContainer.innerHTML = '';
+
+      // Генерируем результаты для каждого кубика
+      for (let i = 0; i < diceCount; i++) {
+        const result = Math.floor(Math.random() * faces) + 1; // Случайное число от 1 до faces
+        const diceElement = document.createElement('div');
+        diceElement.classList.add('dice');
+        diceElement.textContent = result;
+        diceContainer.appendChild(diceElement);
+      }
+    });
+  </script>
+</body>
+</html>

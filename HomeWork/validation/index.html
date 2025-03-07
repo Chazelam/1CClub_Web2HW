@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Форма регистрации</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      display: flex;
+      justify-content: center;
+    }
+    .conteinner{
+      width: 60%;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    input {
+      width: 100%;
+      padding: 8px;
+      box-sizing: border-box;
+    }
+    .error {
+      color: red;
+      font-size: 12px;
+      display: none;
+    }
+    button {
+      padding: 10px 15px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="conteinner">
+    <h1>Регистрация</h1>
+  <form id="registrationForm">
+    <div class="form-group">
+      <label for="name">Имя:</label>
+      <input type="text" id="name" name="name">
+      <div class="error" id="nameError">Поле "Имя" не должно быть пустым.</div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email">
+      <div class="error" id="emailError">Введите корректный email (должен содержать "@").</div>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Пароль:</label>
+      <input type="password" id="password" name="password">
+      <div class="error" id="passwordError">Пароль должен быть не короче 6 символов.</div>
+    </div>
+    <button type="submit">Зарегистрироваться</button>
+  </form>
+  </div>
+  
+
+
+  <script>
+    const form = document.getElementById('registrationForm');
+    const nameInput = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    const nameError = document.getElementById('nameError');
+    const emailError = document.getElementById('emailError');
+    const passwordError = document.getElementById('passwordError');
+
+    form.addEventListener('submit', function (event) {
+
+      let isValid = true;
+
+      // Валидация имени
+      if (nameInput.value.trim() === '') {
+        nameError.style.display = 'block';
+        isValid = false;
+      } else {
+        nameError.style.display = 'none';
+      }
+
+      // Валидация email
+      if (!emailInput.value.includes('@')) {
+        emailError.style.display = 'block';
+        isValid = false;
+      } else {
+        emailError.style.display = 'none';
+      }
+
+      // Валидация пароля
+      if (passwordInput.value.length < 6) {
+        passwordError.style.display = 'block';
+        isValid = false;
+      } else {
+        passwordError.style.display = 'none';
+      }
+
+      // Если форма валидна, выводим сообщение об успешной регистрации
+      if (isValid) {
+        alert('Регистрация успешна!');
+      }
+    });
+  </script>
+</body>
+</html>
